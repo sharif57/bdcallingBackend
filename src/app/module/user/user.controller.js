@@ -55,33 +55,31 @@ const myProfile = async (req, res, next) => {
 
 const getAllUsers = async (req, res, next) => {
     try {
-        const result = await userServices.getAllUsers(); 
+        const result = await userServices.getAllUsers();
         res.status(200).json({
             message: "All users retrieved successfully",
             success: true,
             data: result
         });
     } catch (error) {
-        next(error); 
+        next(error);
     }
 };
 
 
 const updateUser = async (req, res, next) => {
+    const id = req.params.id
+    const data = req.body
+
     try {
-        const { name } = req.body;
-
-        const updatedUser = await userServices.updateUser(req.params.id, { name });
-
-        res.status(200).json({
-            message: "User updated successfully",
-            success: true,
-            data: updatedUser,
-        });
+        const result = await userServices.updateUser(id, data)
+        res.status(200).json({ message: "user updated ", result })
     } catch (error) {
-        next(error);
+        console.log(error)
+        next(error)
+
     }
-};
+}
 
 const deleteUser = async (req, res, next) => {
     try {
@@ -91,16 +89,14 @@ const deleteUser = async (req, res, next) => {
             success: true
         });
     } catch (error) {
-        next(error);  
+        next(error);
     }
 };
 
 
 
 
-// get all user 
-// update user 
-// delete user
+
 const userController = {
     signup,
     getSingleUser,

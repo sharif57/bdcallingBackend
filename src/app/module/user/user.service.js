@@ -57,27 +57,21 @@ const getAllUsers = async () => {
     return await User.find();
 };
 
-const updateUser = async (id, updateData) => {
-    try {
-        const updatedUser = await User.findByIdAndUpdate(
-            id,                   
-            { $set: updateData },  
-            { new: true }      
-        );
 
-        return updatedUser;
-    } catch (error) {
-        throw new Error(error);
-    }
-};
+
+const updateUser = async (id, data) => {
+    const { name, role } = data;
+    const result = await User.findByIdAndUpdate(id, { name, role }, { new: true })
+    return result;
+}
 
 
 const deleteUser = async (id) => {
 
     const deletedUser = await User.findByIdAndDelete(id);
 
-        return deletedUser;  
-    
+    return deletedUser;
+
 };
 
 

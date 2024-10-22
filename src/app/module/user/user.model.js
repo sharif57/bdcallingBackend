@@ -1,6 +1,5 @@
 import { model, Schema } from "mongoose";
 
-// schema create kora
 
 const UserSchema = new Schema({
     name: {
